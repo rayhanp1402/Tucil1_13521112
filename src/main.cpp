@@ -1,6 +1,8 @@
 # include <iostream>
 # include <vector>
 #include <sys/time.h>
+#include <iomanip>
+#include <fstream>
 
 void displayCardsPermutations(std::vector< std::vector<double> > cardsPermutations){
     unsigned count = 0;
@@ -357,14 +359,11 @@ std::vector< std::vector<double> > cards(int a, int b, int c, int d){
     return cardsPermutations;
 }
 
-void solve24(){
+void solve24(double a, double b, double c, double d){
     // Main algorithm of finding the solutions
     unsigned solutionCount = 0;
-    double a, b, c, d; 
     std::vector< std::vector<double> > cardsPermutations;
     std::vector< std::vector<char> > operatorsPermutations = operators();
-
-    std::cin >> a >> b >> c >> d;
 
     cardsPermutations = cards(a, b, c, d);
 
@@ -404,13 +403,65 @@ void solve24(){
     else std::cout << solutionCount << " solutions found\n";
 }
 
+void save24(double a, double b, double c, double d){
+    // Write solutions to file
+    unsigned solutionCount = 0;
+    std::vector< std::vector<double> > cardsPermutations;
+    std::vector< std::vector<char> > operatorsPermutations = operators();
+
+    cardsPermutations = cards(a, b, c, d);
+
+    std::ofstream solutionFile;
+    solutionFile.open ("example.txt");
+
+    for(int i = 0; i < 24; i++){     // For each row in the cards' 2D Vector, traverse through all of the possible operator permutations stored in another 2D Vector
+        for(int j = 0; j < 64; j++){
+            if(cardsPermutations[i][0] != 0){
+                // Case 1: (a operates b) operates (c operates d)
+                if(operate(operate(cardsPermutations[i][0], cardsPermutations[i][1], operatorsPermutations[j][0]), operate(cardsPermutations[i][2], cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][1]) == 24){
+                    solutionFile << '(' << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << ' ' << cardsPermutations[i][1] << ") " << operatorsPermutations[j][1] << " (" << cardsPermutations[i][2] << ' ' << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << ")\n";
+                    solutionCount++;
+                }
+                // Case 2: ((a operates b) operates c) operates d
+                if(operate(operate(operate(cardsPermutations[i][0], cardsPermutations[i][1], operatorsPermutations[j][0]), cardsPermutations[i][2], operatorsPermutations[j][1]), cardsPermutations[i][3], operatorsPermutations[j][2]) == 24){
+                    solutionFile << "((" << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << ' ' << cardsPermutations[i][1] << ") " << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ") " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << '\n';
+                    solutionCount++;
+                }
+                // Case 3: (a operates (b operates c)) operates d
+                if(operate(operate(cardsPermutations[i][0], operate(cardsPermutations[i][1], cardsPermutations[i][2], operatorsPermutations[j][1]), operatorsPermutations[j][0]), cardsPermutations[i][3], operatorsPermutations[j][2]) == 24){
+                    solutionFile << '(' << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " (" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ")) " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << '\n';
+                    solutionCount++;
+                }
+                // Case 4: a operates ((b operates c) operates d)
+                if(operate(cardsPermutations[i][0], operate(operate(cardsPermutations[i][1], cardsPermutations[i][2], operatorsPermutations[j][1]), cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][0]) == 24){
+                    solutionFile << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " ((" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ") " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << ")\n";
+                    solutionCount++;
+                }
+                // Case 5: a operates (b operates(c operates d))
+                if(operate(cardsPermutations[i][0], operate(cardsPermutations[i][1], operate(cardsPermutations[i][2], cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][1]), operatorsPermutations[j][0]) == 24){
+                    solutionFile << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " (" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << " (" << cardsPermutations[i][2] << ' ' << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << "))\n";
+                    solutionCount++;
+                }
+            }
+        }
+    }
+
+    if(solutionCount == 0) solutionFile << "No solutions found\n";
+    else solutionFile << solutionCount << " solutions found\n";
+
+    solutionFile.close();
+}
+
 int main(){
+    double a, b, c, d; 
+    std::cin >> a >> b >> c >> d;
+
     // Start measuring time
     struct timeval begin, end;
     gettimeofday(&begin, 0);
 
     // Solve
-    solve24();
+    solve24(a, b, c, d);
 
     // Stop measuring time and calculate the elapsed time
     gettimeofday(&end, 0);
@@ -418,7 +469,24 @@ int main(){
     long microseconds = end.tv_usec - begin.tv_usec;
     double elapsed = seconds + microseconds*1e-6;
 
-    printf("Execution Time : %.3f seconds\n", elapsed);
+    std::cout << "Execution Time : " << elapsed << " seconds\n\n";
+
+    std::cout << "Do you want to save the answer?(Y/N) ";
+    char input;
+    std:: cin >> input;
+
+    if(input == 'Y'){
+        std::cout << "Saving . . .\n";
+        save24(a, b, c, d);
+
+        std::ofstream solutionFile;
+        solutionFile.open ("example.txt", std::fstream::app);
+        solutionFile << "Execution Time : " << elapsed << " seconds\n\n";
+        solutionFile.close();
+
+        
+        std::cout << "Done\n";
+    }
 
     return 0;
 }
