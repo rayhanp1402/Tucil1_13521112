@@ -1,5 +1,6 @@
 # include <iostream>
 # include <vector>
+#include <sys/time.h>
 
 void displayCardsPermutations(std::vector< std::vector<double> > cardsPermutations){
     unsigned count = 0;
@@ -46,6 +47,7 @@ double operate(double operandA, double operandB, char op){
 }
 
 void permuteOperators(std::vector< std::vector<char> > &operatorsPermutations, unsigned operatorVariant, unsigned startRow){
+    // Additional procedure to permute the operators if there are more than one operator variant (e.g. + and - are two different operators, hence two operator variant)
     if(operatorVariant == 2){
         // Second permutation
         operatorsPermutations[startRow][0] = operatorsPermutations[startRow-1][0];
@@ -89,6 +91,7 @@ void permuteOperators(std::vector< std::vector<char> > &operatorsPermutations, u
 }
 
 std::vector< std::vector<char> > operators(){
+    // Store all permutations of operators +, -, *, and / in a 2D Vector
     std::vector< std::vector<char> > operatorsPermutations;
     operatorsPermutations.resize(64, std::vector<char>(3, 0));
 
@@ -207,131 +210,132 @@ std::vector< std::vector<char> > operators(){
     return operatorsPermutations;
 }
 
-std::vector< std::vector<double> > permuteCards(double arr[]){
+std::vector< std::vector<double> > cards(int a, int b, int c, int d){
+    // Store all permutations of the four cards in a 2D Vector
     std::vector< std::vector<double> > cardsPermutations;
     cardsPermutations.resize(24, std::vector<double>(4, 0));
 
-    cardsPermutations[0][0] = arr[0];
-    cardsPermutations[0][1] = arr[1];
-    cardsPermutations[0][2] = arr[2];
-    cardsPermutations[0][3] = arr[3];
+    cardsPermutations[0][0] = a;
+    cardsPermutations[0][1] = b;
+    cardsPermutations[0][2] = c;
+    cardsPermutations[0][3] = d;
 
-    cardsPermutations[1][0] = arr[0];
-    cardsPermutations[1][1] = arr[1];
-    cardsPermutations[1][2] = arr[3];
-    cardsPermutations[1][3] = arr[2];
+    cardsPermutations[1][0] = a;
+    cardsPermutations[1][1] = b;
+    cardsPermutations[1][2] = d;
+    cardsPermutations[1][3] = c;
 
-    cardsPermutations[2][0] = arr[0];
-    cardsPermutations[2][1] = arr[2];
-    cardsPermutations[2][2] = arr[1];
-    cardsPermutations[2][3] = arr[3];
+    cardsPermutations[2][0] = a;
+    cardsPermutations[2][1] = c;
+    cardsPermutations[2][2] = b;
+    cardsPermutations[2][3] = d;
 
-    cardsPermutations[3][0] = arr[0];
-    cardsPermutations[3][1] = arr[3];
-    cardsPermutations[3][2] = arr[1];
-    cardsPermutations[3][3] = arr[2];
+    cardsPermutations[3][0] = a;
+    cardsPermutations[3][1] = d;
+    cardsPermutations[3][2] = b;
+    cardsPermutations[3][3] = c;
 
-    cardsPermutations[4][0] = arr[0];
-    cardsPermutations[4][1] = arr[2];
-    cardsPermutations[4][2] = arr[3];
-    cardsPermutations[4][3] = arr[1];
+    cardsPermutations[4][0] = a;
+    cardsPermutations[4][1] = c;
+    cardsPermutations[4][2] = d;
+    cardsPermutations[4][3] = b;
 
-    cardsPermutations[5][0] = arr[0];
-    cardsPermutations[5][1] = arr[3];
-    cardsPermutations[5][2] = arr[2];
-    cardsPermutations[5][3] = arr[1];
+    cardsPermutations[5][0] = a;
+    cardsPermutations[5][1] = d;
+    cardsPermutations[5][2] = c;
+    cardsPermutations[5][3] = b;
 
-    cardsPermutations[6][0] = arr[1];
-    cardsPermutations[6][1] = arr[0];
-    cardsPermutations[6][2] = arr[2];
-    cardsPermutations[6][3] = arr[3];
+    cardsPermutations[6][0] = b;
+    cardsPermutations[6][1] = a;
+    cardsPermutations[6][2] = c;
+    cardsPermutations[6][3] = d;
 
-    cardsPermutations[7][0] = arr[1];
-    cardsPermutations[7][1] = arr[0];
-    cardsPermutations[7][2] = arr[3];
-    cardsPermutations[7][3] = arr[2];
+    cardsPermutations[7][0] = b;
+    cardsPermutations[7][1] = a;
+    cardsPermutations[7][2] = d;
+    cardsPermutations[7][3] = c;
 
-    cardsPermutations[8][0] = arr[2];
-    cardsPermutations[8][1] = arr[0];
-    cardsPermutations[8][2] = arr[1];
-    cardsPermutations[8][3] = arr[3];
+    cardsPermutations[8][0] = c;
+    cardsPermutations[8][1] = a;
+    cardsPermutations[8][2] = b;
+    cardsPermutations[8][3] = d;
 
-    cardsPermutations[9][0] = arr[3];
-    cardsPermutations[9][1] = arr[0];
-    cardsPermutations[9][2] = arr[1];
-    cardsPermutations[9][3] = arr[2];
+    cardsPermutations[9][0] = d;
+    cardsPermutations[9][1] = a;
+    cardsPermutations[9][2] = b;
+    cardsPermutations[9][3] = c;
 
-    cardsPermutations[10][0] = arr[2];
-    cardsPermutations[10][1] = arr[0];
-    cardsPermutations[10][2] = arr[3];
-    cardsPermutations[10][3] = arr[1];
+    cardsPermutations[10][0] = c;
+    cardsPermutations[10][1] = a;
+    cardsPermutations[10][2] = d;
+    cardsPermutations[10][3] = b;
 
-    cardsPermutations[11][0] = arr[3];
-    cardsPermutations[11][1] = arr[0];
-    cardsPermutations[11][2] = arr[2];
-    cardsPermutations[11][3] = arr[1];
+    cardsPermutations[11][0] = d;
+    cardsPermutations[11][1] = a;
+    cardsPermutations[11][2] = c;
+    cardsPermutations[11][3] = b;
 
-    cardsPermutations[12][0] = arr[1];
-    cardsPermutations[12][1] = arr[2];
-    cardsPermutations[12][2] = arr[0];
-    cardsPermutations[12][3] = arr[3];
+    cardsPermutations[12][0] = b;
+    cardsPermutations[12][1] = c;
+    cardsPermutations[12][2] = a;
+    cardsPermutations[12][3] = d;
 
-    cardsPermutations[13][0] = arr[1];
-    cardsPermutations[13][1] = arr[3];
-    cardsPermutations[13][2] = arr[0];
-    cardsPermutations[13][3] = arr[2];
+    cardsPermutations[13][0] = b;
+    cardsPermutations[13][1] = d;
+    cardsPermutations[13][2] = a;
+    cardsPermutations[13][3] = c;
 
-    cardsPermutations[14][0] = arr[2];
-    cardsPermutations[14][1] = arr[1];
-    cardsPermutations[14][2] = arr[0];
-    cardsPermutations[14][3] = arr[3];
+    cardsPermutations[14][0] = c;
+    cardsPermutations[14][1] = b;
+    cardsPermutations[14][2] = a;
+    cardsPermutations[14][3] = d;
 
-    cardsPermutations[15][0] = arr[3];
-    cardsPermutations[15][1] = arr[1];
-    cardsPermutations[15][2] = arr[0];
-    cardsPermutations[15][3] = arr[2];
+    cardsPermutations[15][0] = d;
+    cardsPermutations[15][1] = b;
+    cardsPermutations[15][2] = a;
+    cardsPermutations[15][3] = c;
 
-    cardsPermutations[16][0] = arr[2];
-    cardsPermutations[16][1] = arr[3];
-    cardsPermutations[16][2] = arr[0];
-    cardsPermutations[16][3] = arr[1];
+    cardsPermutations[16][0] = c;
+    cardsPermutations[16][1] = d;
+    cardsPermutations[16][2] = a;
+    cardsPermutations[16][3] = b;
 
-    cardsPermutations[17][0] = arr[3];
-    cardsPermutations[17][1] = arr[2];
-    cardsPermutations[17][2] = arr[0];
-    cardsPermutations[17][3] = arr[1];
+    cardsPermutations[17][0] = d;
+    cardsPermutations[17][1] = c;
+    cardsPermutations[17][2] = a;
+    cardsPermutations[17][3] = b;
 
-    cardsPermutations[18][0] = arr[1];
-    cardsPermutations[18][1] = arr[2];
-    cardsPermutations[18][2] = arr[3];
-    cardsPermutations[18][3] = arr[0];
+    cardsPermutations[18][0] = b;
+    cardsPermutations[18][1] = c;
+    cardsPermutations[18][2] = d;
+    cardsPermutations[18][3] = a;
 
-    cardsPermutations[19][0] = arr[1];
-    cardsPermutations[19][1] = arr[3];
-    cardsPermutations[19][2] = arr[2];
-    cardsPermutations[19][3] = arr[0];
+    cardsPermutations[19][0] = b;
+    cardsPermutations[19][1] = d;
+    cardsPermutations[19][2] = c;
+    cardsPermutations[19][3] = a;
 
-    cardsPermutations[20][0] = arr[2];
-    cardsPermutations[20][1] = arr[1];
-    cardsPermutations[20][2] = arr[3];
-    cardsPermutations[20][3] = arr[0];
+    cardsPermutations[20][0] = c;
+    cardsPermutations[20][1] = b;
+    cardsPermutations[20][2] = d;
+    cardsPermutations[20][3] = a;
 
-    cardsPermutations[21][0] = arr[3];
-    cardsPermutations[21][1] = arr[1];
-    cardsPermutations[21][2] = arr[2];
-    cardsPermutations[21][3] = arr[0];
+    cardsPermutations[21][0] = d;
+    cardsPermutations[21][1] = b;
+    cardsPermutations[21][2] = c;
+    cardsPermutations[21][3] = a;
 
-    cardsPermutations[22][0] = arr[2];
-    cardsPermutations[22][1] = arr[3];
-    cardsPermutations[22][2] = arr[1];
-    cardsPermutations[22][3] = arr[0];
+    cardsPermutations[22][0] = c;
+    cardsPermutations[22][1] = d;
+    cardsPermutations[22][2] = b;
+    cardsPermutations[22][3] = a;
 
-    cardsPermutations[23][0] = arr[3];
-    cardsPermutations[23][1] = arr[2];
-    cardsPermutations[23][2] = arr[1];
-    cardsPermutations[23][3] = arr[0];
+    cardsPermutations[23][0] = d;
+    cardsPermutations[23][1] = c;
+    cardsPermutations[23][2] = b;
+    cardsPermutations[23][3] = a;
 
-    // Mengecek dan menyederhanakan permutasi apabila terdapat permutasi yang sama 
+    // Disable duplicate permutation
     unsigned isSameElmt; // Boolean value
 
     for(int i = 0; i < 24; i++){
@@ -345,7 +349,7 @@ std::vector< std::vector<double> > permuteCards(double arr[]){
                         break;
                     }
                 }
-                if(isSameElmt == 1) cardsPermutations[j][0] = 0;
+                if(isSameElmt == 1) cardsPermutations[j][0] = 0; // Make the element of the first column in a duplicate row 0 to disable the row
             }
         }
     }
@@ -353,49 +357,68 @@ std::vector< std::vector<double> > permuteCards(double arr[]){
     return cardsPermutations;
 }
 
-int main(){
+void solve24(){
+    // Main algorithm of finding the solutions
     unsigned solutionCount = 0;
     double a, b, c, d; 
-    double cards[4];
     std::vector< std::vector<double> > cardsPermutations;
     std::vector< std::vector<char> > operatorsPermutations = operators();
 
     std::cin >> a >> b >> c >> d;
 
-    cards[0] = a;
-    cards[1] = b;
-    cards[2] = c;
-    cards[3] = d;
+    cardsPermutations = cards(a, b, c, d);
 
-    cardsPermutations = permuteCards(cards);
-
-    for(int i = 0; i < 24; i++){
+    for(int i = 0; i < 24; i++){     // For each row in the cards' 2D Vector, traverse through all of the possible operator permutations stored in another 2D Vector
         for(int j = 0; j < 64; j++){
-            if(operate(operate(cardsPermutations[i][0], cardsPermutations[i][1], operatorsPermutations[j][0]), operate(cardsPermutations[i][2], cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][1]) == 24){
-                std::cout << '(' << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << ' ' << cardsPermutations[i][1] << ") " << operatorsPermutations[j][1] << " (" << cardsPermutations[i][2] << ' ' << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << ")\n";
-                solutionCount++;
-            }
-            if(operate(operate(operate(cardsPermutations[i][0], cardsPermutations[i][1], operatorsPermutations[j][0]), cardsPermutations[i][2], operatorsPermutations[j][1]), cardsPermutations[i][3], operatorsPermutations[j][2]) == 24){
-                std::cout << "((" << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << ' ' << cardsPermutations[i][1] << ") " << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ") " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << '\n';
-                solutionCount++;
-            }
-            if(operate(operate(cardsPermutations[i][0], operate(cardsPermutations[i][1], cardsPermutations[i][2], operatorsPermutations[j][1]), operatorsPermutations[j][0]), cardsPermutations[i][3], operatorsPermutations[j][2]) == 24){
-                std::cout << '(' << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " (" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ")) " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << '\n';
-                solutionCount++;
-            }
-            if(operate(cardsPermutations[i][0], operate(operate(cardsPermutations[i][1], cardsPermutations[i][2], operatorsPermutations[j][1]), cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][0]) == 24){
-                std::cout << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " ((" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ") " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << ")\n";
-                solutionCount++;
-            }
-            if(operate(cardsPermutations[i][0], operate(cardsPermutations[i][1], operate(cardsPermutations[i][2], cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][1]), operatorsPermutations[j][0]) == 24){
-                std::cout << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " (" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << " (" << cardsPermutations[i][2] << ' ' << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << "))\n";
-                solutionCount++;
+            if(cardsPermutations[i][0] != 0){
+                // Case 1: (a operates b) operates (c operates d)
+                if(operate(operate(cardsPermutations[i][0], cardsPermutations[i][1], operatorsPermutations[j][0]), operate(cardsPermutations[i][2], cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][1]) == 24){
+                    std::cout << '(' << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << ' ' << cardsPermutations[i][1] << ") " << operatorsPermutations[j][1] << " (" << cardsPermutations[i][2] << ' ' << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << ")\n";
+                    solutionCount++;
+                }
+                // Case 2: ((a operates b) operates c) operates d
+                if(operate(operate(operate(cardsPermutations[i][0], cardsPermutations[i][1], operatorsPermutations[j][0]), cardsPermutations[i][2], operatorsPermutations[j][1]), cardsPermutations[i][3], operatorsPermutations[j][2]) == 24){
+                    std::cout << "((" << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << ' ' << cardsPermutations[i][1] << ") " << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ") " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << '\n';
+                    solutionCount++;
+                }
+                // Case 3: (a operates (b operates c)) operates d
+                if(operate(operate(cardsPermutations[i][0], operate(cardsPermutations[i][1], cardsPermutations[i][2], operatorsPermutations[j][1]), operatorsPermutations[j][0]), cardsPermutations[i][3], operatorsPermutations[j][2]) == 24){
+                    std::cout << '(' << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " (" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ")) " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << '\n';
+                    solutionCount++;
+                }
+                // Case 4: a operates ((b operates c) operates d)
+                if(operate(cardsPermutations[i][0], operate(operate(cardsPermutations[i][1], cardsPermutations[i][2], operatorsPermutations[j][1]), cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][0]) == 24){
+                    std::cout << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " ((" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << ' ' << cardsPermutations[i][2] << ") " << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << ")\n";
+                    solutionCount++;
+                }
+                // Case 5: a operates (b operates(c operates d))
+                if(operate(cardsPermutations[i][0], operate(cardsPermutations[i][1], operate(cardsPermutations[i][2], cardsPermutations[i][3], operatorsPermutations[j][2]), operatorsPermutations[j][1]), operatorsPermutations[j][0]) == 24){
+                    std::cout << cardsPermutations[i][0] << ' ' << operatorsPermutations[j][0] << " (" << cardsPermutations[i][1] << ' ' << operatorsPermutations[j][1] << " (" << cardsPermutations[i][2] << ' ' << operatorsPermutations[j][2] << ' ' << cardsPermutations[i][3] << "))\n";
+                    solutionCount++;
+                }
             }
         }
     }
 
     if(solutionCount == 0) std::cout << "No solutions found\n";
     else std::cout << solutionCount << " solutions found\n";
+}
+
+int main(){
+    // Start measuring time
+    struct timeval begin, end;
+    gettimeofday(&begin, 0);
+
+    // Solve
+    solve24();
+
+    // Stop measuring time and calculate the elapsed time
+    gettimeofday(&end, 0);
+    long seconds = end.tv_sec - begin.tv_sec;
+    long microseconds = end.tv_usec - begin.tv_usec;
+    double elapsed = seconds + microseconds*1e-6;
+
+    printf("Execution Time : %.3f seconds\n", elapsed);
 
     return 0;
 }
