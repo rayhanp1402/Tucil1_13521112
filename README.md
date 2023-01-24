@@ -76,13 +76,19 @@ Untuk input yang tidak sesuai, program akan mengulang hingga input benar.
 
 ![Menu](https://cdn.discordapp.com/attachments/865154167169351730/1067554603052318730/show1.jpg)
 
+<br>
+
 2. Solve
 
 ![Solve](https://cdn.discordapp.com/attachments/865154167169351730/1067554602595127446/show2.jpg)
 
+<br>
+
 3. Simpan ke file
 
 ![Save](https://cdn.discordapp.com/attachments/865154167169351730/1067554602091814912/show3.jpg)
+
+<br>
 
 4. Exit
 
