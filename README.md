@@ -35,7 +35,7 @@ cd Tucil1_13521112/bin
 24solver
 ```
 
-Atau jika Anda telah mengkompilasi secara manual, buka console dan masuk ke directory tempat Anda clone repository ini dan jalankan perintah berikut
+Atau jika Anda telah mengkompilasi sendiri, buka console dan masuk ke directory tempat Anda clone repository ini dan jalankan perintah berikut
 
 ```sh
 cd Tucil1_13521112/bin
@@ -55,3 +55,18 @@ Anda akan berada pada directory untuk source code. Untuk mengkompilasi, jalankan
 ```sh
 g++ -o nama_file_executable main.cpp solve24.cpp permutations.cpp
 ```
+
+### Penggunaan Program
+Saat run program, pertama kali akan ditampilkan main menu. Dari situ, pengguna memiliki pilihan untuk keluar dari program
+atau "solve", yaitu mencari solusi untuk permainan Kartu 24.
+
+Apabila pengguna memilih "solve", akan ditampilkan pilihan apakah ingin memilih empat kartu secara manual atau mengacaknya.
+Untuk pemilihan kartu secara manual, input dapat berupa angka 2-10, 1 atau A, 11 atau J, 12 atau Q, dan 13 atau K
+
+Selanjutnya akan ditampilkan jumlah solusi, solusi-solusinya, serta waktu eksekusi program dimana pengguna memiliki pilihan
+untuk menyimpan hasil solusi tersebut pada sebuah file yang dapat dinamai oleh pengguna tersebut. File penyimpanan solusi
+disimpan pada folder test.
+
+Kemudian program akan kembali ke main menu.
+
+Untuk input yang tidak sesuai, program akan mengulang hingga input benar.
