@@ -70,3 +70,8 @@ disimpan pada folder test.
 Kemudian program akan kembali ke main menu.
 
 Untuk input yang tidak sesuai, program akan mengulang hingga input benar.
+
+## Dibuat oleh
+Nama : Rayhan Hanif Maulana Pradana
+
+NIM : 13521112
