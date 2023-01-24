@@ -25,3 +25,12 @@ Agar program dapat dijalankan pada mesin Anda, clone repository program dengan c
 ```sh
 git clone https://github.com/rayhanp1402/Tucil1_13521112.git
 ```
+
+### Cara Run Program
+Untuk menjalankan program, buka console dan masuk ke directory tempat Anda clone repository ini
+Kemudian, jalankan perintah berikut
+
+```sh
+cd Tucil1_13521112/bin
+24solver
+```
