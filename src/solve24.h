@@ -1,7 +1,7 @@
 # include <iostream>
 # include <vector>
-#include <iomanip>
-#include <sstream>
+# include <iomanip>
+# include <sstream>
 # include <fstream>
 
 # ifndef _SOLVE24_H_
@@ -19,7 +19,7 @@ std::vector< std::vector<double> > cards(int a, int b, int c, int d);
 std::string doubleToString(double var);
 // Convert double to string with precision set to 0
 
-void convertInput(std::string inputVar, double *var);
+double convertInput(std::string inputVar);
 // Converts user input (string) to double
 
 double operate(double operandA, double operandB, char op);

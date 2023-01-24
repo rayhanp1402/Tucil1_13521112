@@ -7,20 +7,20 @@ std::string doubleToString(double var){
     return stream.str();
 }
 
-void convertInput(std::string inputVar, double *var){
-    if(inputVar == "1" || inputVar == "A" || inputVar == "a") (*var) == 1;
-    if(inputVar == "2") (*var) == 2;
-    if(inputVar == "3") (*var) == 3;
-    if(inputVar == "4") (*var) == 4;
-    if(inputVar == "5") (*var) == 5;
-    if(inputVar == "6") (*var) == 6;
-    if(inputVar == "7") (*var) == 7;
-    if(inputVar == "8") (*var) == 8;
-    if(inputVar == "9") (*var) == 9;
-    if(inputVar == "10") (*var) == 10;
-    if(inputVar == "11" || inputVar == "J" || inputVar == "j") (*var) == 11;
-    if(inputVar == "12" || inputVar == "Q" || inputVar == "q") (*var) == 12;
-    if(inputVar == "13" || inputVar == "K" || inputVar == "k") (*var) == 13;
+double convertInput(std::string inputVar){
+    if(inputVar == "1" || inputVar == "A" || inputVar == "a") return 1;
+    if(inputVar == "2") return 2;
+    if(inputVar == "3") return 3;
+    if(inputVar == "4") return 4;
+    if(inputVar == "5") return 5;
+    if(inputVar == "6") return 6;
+    if(inputVar == "7") return 7;
+    if(inputVar == "8") return 8;
+    if(inputVar == "9") return 9;
+    if(inputVar == "10") return 10;
+    if(inputVar == "11" || inputVar == "J" || inputVar == "j") return 11;
+    if(inputVar == "12" || inputVar == "Q" || inputVar == "q") return 12;
+    if(inputVar == "13" || inputVar == "K" || inputVar == "k") return 13;
 }
 
 double operate(double operandA, double operandB, char op){

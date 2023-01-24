@@ -1,0 +1,5 @@
+Cards : 1 1 1 1
+
+No solutions found
+
+Execution Time : 0 seconds
