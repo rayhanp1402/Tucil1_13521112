@@ -35,10 +35,23 @@ cd Tucil1_13521112/bin
 24solver
 ```
 
-Atau jika Anda mengkompilasi secara manual, buka console dan masuk ke directory tempat Anda clone repository ini dan jalankan perintah berikut
+Atau jika Anda telah mengkompilasi secara manual, buka console dan masuk ke directory tempat Anda clone repository ini dan jalankan perintah berikut
 
 ```sh
 cd Tucil1_13521112/bin
 
-nama_file_hasil_kompilasi
+nama_file_executable
+```
+
+### Cara Kompilasi Program
+Jika Anda ingin mengkompilasi secara manual, buka console dan masuk ke directory tempat Anda clone repository ini dan jalankan perintah berikut
+
+```sh
+cd Tucil1_13521112/src
+```
+
+Anda akan berada pada directory untuk source code. Untuk mengkompilasi, jalankan perintah berikut
+
+```sh
+g++ -o nama_file_executable main.cpp solve24.cpp permutations.cpp
 ```
