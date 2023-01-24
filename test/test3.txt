@@ -1,12 +1,5 @@
-Cards : 6 6 6 6
+Cards : A A A A
 
-7 solutions found :
-(6 + 6) + (6 + 6)
-((6 + 6) + 6) + 6
-(6 + (6 + 6)) + 6
-6 + ((6 + 6) + 6)
-6 + (6 + (6 + 6))
-((6 * 6) - 6) - 6
-(6 * 6) - (6 + 6)
+No solutions found
 
-Execution Time : 0 seconds
+Execution Time : 0.002018 seconds
