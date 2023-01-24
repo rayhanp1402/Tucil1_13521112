@@ -17,4 +17,4 @@ Implementasi Algoritma Brute Force yang digunakan dalam program adalah :
 ### Requirement
 Untuk melakukan kompilasi terhadap program, diperlukan compiler C/C++ yang dapat dirujuk pada tautan berikut
 
-<a href="https://gcc.gnu.org/install/" target="_blank"></a>
+<a href="https://gcc.gnu.org/install/" target="_blank">GCCInstall</a>
