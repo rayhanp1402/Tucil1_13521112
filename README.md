@@ -18,3 +18,10 @@ Implementasi Algoritma Brute Force yang digunakan dalam program adalah :
 Untuk melakukan kompilasi terhadap program, diperlukan compiler C/C++ yang dapat dirujuk pada tautan berikut
 
 <a href="https://gcc.gnu.org/install/" target="_blank">GCCInstall</a>
+
+### Cara Clone Program
+Agar program dapat dijalankan pada mesin Anda, clone repository program dengan cara
+
+```sh
+git clone https://github.com/rayhanp1402/Tucil1_13521112.git
+```
